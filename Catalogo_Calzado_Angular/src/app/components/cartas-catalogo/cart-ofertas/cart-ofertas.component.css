@@ -1,0 +1,69 @@
+p {
+    font-size: 15px;
+}
+
+.card-img-top {
+    width: 90%;
+    padding-left: 20px;
+}
+
+.card-title {
+    color: #000000;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    font-weight: 1000;
+  }
+/****Estilo de botones*****/
+.btn-success {
+    background-color: #1F618D;
+    border-color: #1F618D;
+    color: #ffffff;
+}
+
+.btn-success:hover {
+    background-color: #242424;
+    border-color: #242424;
+    color: #fff;
+}
+
+
+/***** CSS de cartas ****/
+.card {
+    transition: all 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+/* Hace que la imagen del slide se ponga de color original en cierto
+    pixeles de la pantalla */
+@media (max-width: 740px) {
+    .bg-2 {
+        padding-bottom: 500px;
+        padding: -20px;
+    }
+}
+
+
+/* Estilos para el contenedor */
+.zoom-effect {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    height: 100%;
+}
+
+/* Efecto de zoom al pasar el cursor sobre la imagen */
+.zoom-effect:hover img {
+    transform: scale(0.9);
+    width: 100%;
+    /* La imagen ocupa todo el espacio del contenedor */
+    height: 100%;
+    /* La imagen ocupa todo el espacio del contenedor */
+}
+
+/* Estilos para la imagen */
+.zoom-effect img {
+    transition: transform 0.4s ease;
+}

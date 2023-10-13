@@ -1,0 +1,79 @@
+<div class="btn-group pb-3 px-4 mt-5" role="group">
+    <button (click)="enviar()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registro">
+        <i class="fa-solid fa-square-up-right"></i> Insertar
+    </button>
+</div>
+
+<div class="card mx-4" alt="contenedor de carta">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h2 class="card-title">Lista de Marcas</h2>
+        </div>
+    </div>
+
+    <!--Buscador dentro de la tabla-->
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="container">
+                    <div class="d-flex">
+                        <input class="form-control form-control-lg me-2" type="search" placeholder="Buscar marca"
+                            aria-label="Search" #txtSearch (input)="filtrar(txtSearch.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-----Cuerpo de la tabla -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead alt="encabezados" class="bg-dark" style="color: white;">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre de marca</th>
+                        <th class="table-col-desc d-none d-lg-table-cell">Descripción</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+
+                <div class="d-flex mt-2">
+                    <p class="text-danger" *ngIf="ListaMarca.length === 0 && txtSearch.value.length >= 0">No se encontró
+                        marca</p>
+                </div>
+
+                <tbody
+                    *ngFor="let ListaMarca of ListaMarca | paginate: { itemsPerPage: 5, currentPage: p }; let i= index">
+                    <tr>
+                        <td alt="codigo">{{ListaMarca.id_Marca}}</td>
+                        <td alt="nombre de marca">{{ListaMarca.nombre}}</td>
+                        <td class="table-col-desc d-none d-lg-table-cell" alt="descripcion">
+                            {{ListaMarca.descripcion}}
+                        </td>
+                        <td>
+                            <div class="btn-group p-2" role="group">
+                                <button (click)="getIDMarca(ListaMarca.id_Marca)" class="btn btn-primary me-2"
+                                    data-bs-toggle="modal" data-bs-target="#modificar">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <button (click)="eliminar(ListaMarca.id_Marca)" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      <!--Paginacion-->
+      <pagination-controls (pageChange)="p = $event" 
+      responsive="true"
+      previousLabel="" 
+      nextLabel="" 
+      class="my-pagination d-flex justify-content-center"
+      [autoHide]="true">
+    </pagination-controls>
+    </div>
+    <app-modificar-marca></app-modificar-marca>
+</div>

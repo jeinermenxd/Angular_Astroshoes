@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<div class="mt-4 text-center">
+    <pagination-controls (pageChange)="p = $event" class="pagination-custom" previousLabel="" nextLabel=""></pagination-controls>
+</div>
+  
+<div #pdfContainer class="container pb-5 p-3">
+    <div class="col-md-11 card mx-auto"> <!-- Utiliza col-md-11 para el contenido centralizado -->
+        <h2 class="d-flex align-items-center">
+            <strong style="font-weight: 1000;">Comprobante</strong>
+            <img src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea"
+                width="100" height="100" class="ml-auto">
+        </h2>
+        <hr />
+        <div class="row  mt-2" *ngFor="let comprobante of comprobantes | paginate: { itemsPerPage: 1, currentPage: p }">
+            <div class="col-md-5 mb-3">
+                <!-- Utiliza col-md-3 para que ocupe 3 columnas en pantallas medianas y superiores -->
+                <h5>N° de Comprobante: <span style="font-weight: 400;"> {{ comprobante.id_comprobante }}</span></h5>
+                <h5>Fecha: <span style="font-weight: 400;">{{ comprobante.fecha_venta | date: 'dd/MM/yyyy' }}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row" *ngFor="let comprobante of comprobantes | paginate: { itemsPerPage: 1, currentPage: p }">
+            <table class="table table-borderless factura">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre del producto</th>
+                        <th class="text-center">Cantidad</th>
+                        <th class="text-center">Precio Unitario</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let detalle of comprobante.detalles">
+                        <td>{{ detalle.codigo_producto }}</td>
+                        <td>{{ detalle.nombre_producto }}</td>
+                        <td class="text-center">{{ detalle.cantidad }}</td>
+                        <td class="text-center">$ {{ detalle.precio_unitario }}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th></th><th></th>
+                        <th class="text-center">Subtotal: </th>
+                        <th class="text-center" style="font-weight: 600;">$ {{ SubTotal(comprobante.id_comprobante) | number:'1.2-2' }}</th>
+                    </tr>
+                    <tr>
+                        <th></th><th></th>
+                        <th class="text-center">Total Factura: </th>                      
+                        <th class="text-center" style="font-weight: 900;">$ {{ comprobante.total }}</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mb-4">
+    <button class="btn btn-success" (click)="generatePDF()">Generar PDF</button>
+</div>
+
+<app-footer></app-footer>

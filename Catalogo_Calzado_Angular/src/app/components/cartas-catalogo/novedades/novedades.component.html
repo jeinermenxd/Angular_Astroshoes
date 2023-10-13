@@ -1,0 +1,59 @@
+<div class="bg-2 p-5">
+    <h1 class=" animated fadeIn t-stroke-shadow fs-1 fw-bolder text-center">Ultimas novedades de ASTROSHOES</h1>
+</div>
+<!---------------------- Titulo --------------------------
+---------------------------------------------------------->
+<div class="category-page">
+    <!-- Productos de hombres-->
+    <section class="products p-t-small">
+        <div class="container animated fadeIn">
+            <div class="row">
+                <ng-container *ngIf="ListaProducto.length">
+                    <div class="col-md-4 col-lg-3 mb-4 col-6" 
+                    *ngFor="let ListaProducto of ListaActivo | paginate: { itemsPerPage: 12, currentPage: p }" >
+                        <div class="card d-flex flex-column border-1"  data-aos="fade-up"
+                        data-aos-anchor-placement="top-bottom">
+                            <div class="zoom-effect" >
+                                <a (click)="abrirmodal()" (click)="getIDProducto(ListaProducto.pk_id_producto)"
+                                    data-toggle="modal" data-target="#modal1" class="m-2">
+                                    <img src="{{ListaProducto.img}}" alt="imagenproducto" class="img-fluid">
+                                </a>
+                                <div class="onsale position-absolute top-0 start-0">
+                                    <span *ngIf="ListaProducto.oferta != '0'" class="badge rounded-8"><span class="discount">-{{ListaProducto.oferta}}%</span></span>
+                                </div>
+                            </div>
+
+                            <div class="card-body" >
+                                <!-- Sección del título -->
+                                <p class="card-title mb-2">{{ListaProducto.nombre_producto}}</p>
+                                <p class="card-text mb-2 d-inline">{{ListaProducto.genero}}s / color: </p>
+                                <p class="card-text mb-2 d-inline">{{ListaProducto.color}}</p>
+
+                                <ul class="price list-inline mt-2">
+                                    <p class="price" style="font-weight: 700;">Precio: $ {{ListaProducto.costo}}</p>
+                                </ul>
+                                <!-- Botón para abrir el modal -->
+                                <div class="text-center">
+                                    <a class="btn btn-success" style="color: white;" (click)="abrirmodal()"
+                                        (click)="getIDProducto(ListaProducto.pk_id_producto)" data-toggle="modal"
+                                        data-target="#modal1">
+                                        Detalles
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="p-4 text-center">
+                <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                    class="pagination-lg d-flex justify-content-center"></pagination-controls>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--Logica de abrir modal de informacion del producto-->
+<div *ngIf="info_modal==true">
+    <app-info-modals></app-info-modals>
+</div>

@@ -1,0 +1,47 @@
+<!--Formulario de modificacion de pdf-->
+<div class="modal fade" id="modificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Modificación del PDF </h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <!--Formulario para modificar : marcas--->
+            <div class="modal-body">
+                <form *ngFor="let detalle of cargar">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label alt="nombre">Version PDF</label>
+                                <!--Entrada de los datos y carga de datos para el modificar-->
+                                <input [(ngModel)]="detalle.version_pdf" type="text" class="form-control"
+                                    name="version del pdf" placeholder={{detalle.version_pdf}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción del PDF </label>
+                            <textarea [(ngModel)]="detalle.descripcion" type="text" class="form-control" rows="4"
+                                placeholder="Descripción del producto" name="Descripción del pdf "></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label alt="nombre">Enlace PDF</label>
+                                <!--Entrada de los datos y carga de datos para el modificar-->
+                                <textarea [(ngModel)]="detalle.enlace_pdf" type="text" class="form-control" rows="7"
+                                    name="Enlace del pdf" placeholder={{detalle.enlace_pdf}}></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button
+                            (click)="modificar(detalle.id_pdf,detalle.version_pdf,detalle.enlace_pdf,detalle.descripcion)"
+                            type="button" class="btn btn-success" data-bs-dismiss="modal"> Modificar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

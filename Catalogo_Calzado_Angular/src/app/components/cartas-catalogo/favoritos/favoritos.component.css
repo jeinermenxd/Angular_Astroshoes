@@ -1,0 +1,45 @@
+p {
+  font-size: 15px;
+}
+
+/* Estilos para la imagen */
+.zoom-effect img {
+  transition: transform 0.4s ease;
+}
+
+/* Estilos para el contenedor */
+.zoom-effect {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* Efecto de zoom al pasar el cursor sobre la imagen */
+.zoom-effect:hover img {
+  transform: scale(0.9);
+  width: 100%;
+  /* La imagen ocupa todo el espacio del contenedor */
+  height: 100%;
+  /* La imagen ocupa todo el espacio del contenedor */
+}
+
+/* Hace que la imagen del slide se ponga de color original en cierto
+  pixeles de la pantalla */
+@media (max-width: 740px) {
+  .bg-2 {
+    padding-bottom: 500px;
+    padding: -20px;
+  }
+}
+
+/* Aumentar el tamaño de la paginación */
+.pagination-lg {
+  font-size: 20px; /* Ajusta el tamaño de la fuente según tus preferencias */
+  margin: 10px 0; /* Ajusta el espaciado vertical según tus preferencias */
+}
+
+/* Aumentar el tamaño de los botones de la paginación */
+.pagination-lg .page-link {
+  padding: 10px 16px; /* Ajusta el padding según tus preferencias */
+}

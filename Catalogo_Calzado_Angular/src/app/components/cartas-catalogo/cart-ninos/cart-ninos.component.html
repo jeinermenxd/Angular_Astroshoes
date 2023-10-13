@@ -1,0 +1,136 @@
+
+<app-marcas-image></app-marcas-image>
+<section class="page-section animated fadeIn">
+    <div class="container-fluid animated fadeIn">
+        <div class="text-center">
+            <h1 class="animated fadeIn t-stroke-shadow">CATÁLOGO DE NIÑOS</h1>
+        </div>
+        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+            class="pagination-lg d-none d-lg-flex justify-content-end"></pagination-controls>
+
+        <!-- Toggle de Bootstrap 5 para contraer/expandir el filtro en pantallas pequeñas -->
+        <div class="d-lg-none d-flex justify-content-center mt-5">
+            <button type="button" class="btn btn-dark btn-block mx-auto" data-bs-toggle="collapse"
+                data-bs-target="#filterCollapse">
+                Mostrar Filtros
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="collapse d-lg-block col-lg-3" id="filterCollapse">
+                <div class="sticky-top">
+                    <div class="blog-form">
+                        <!---------Filtro de las Talla--------->
+                        <h2 class="blog-sidebar-title"><b>Talla</b></h2>
+                        <hr />
+                        <select #comboBox3 class="custom-select form-control-border"
+                            (change)="updateTallaValue($event)" id="tallaSelect" [(ngModel)]="tallaSelect">
+                            <option value="0">Seleccione Tallas</option>
+                            <option *ngFor="let talla of ListaTalla2" [value]="talla">{{ talla }}</option>
+                        </select>
+                        <div>&nbsp;</div>
+                        <!---------Filtro de las marcas--------->
+                        <h2 class="blog-sidebar-title"><b>Marcas</b></h2>
+                        <hr />
+                        <select (change)="getSelectedMarca($event)" title="Brandd" name="brand"
+                            class="form-control custom-select" id="marcaSelect" [(ngModel)]="marcaSelect">
+                            <option value="0">Seleccione Marcas</option>
+                            <option *ngFor="let ListaMarca of ListaMarca;
+                            let i=index" value="{{ListaMarca.id_Marca}}">{{ListaMarca.nombre}}
+                            </option>
+                        </select>
+
+                        <div>&nbsp;</div>
+                        <h2 class="blog-sidebar-title"><b>Precio</b></h2>
+                        <hr />
+                        <select (change)="getSelectedPrecio($event)" title="Brandd" name="brand"
+                            class="form-control custom-select" id="precioSelect" [(ngModel)]="selectedPrecio">
+                            <option value="0">Seleccionar</option>
+                            <option value="25-50">$25 - 50 </option>
+                            <option value="51-75">$51 - 75 </option>
+                            <option value="76-100">$76 - 100</option>
+                            <option value="101-125">$101 - 125</option>
+                            <option value="126-150">$126 - 150</option>
+                            <option value="mayores a 150">Por encima de $150</option>
+                        </select>
+
+                        <div>&nbsp;</div>
+
+                        <h2 class="blog-sidebar-title"><b>Colores</b></h2>
+
+                        <hr />
+                        <div class="row">
+                            <ul class="list-inline d-flex justify-content-center" (click)="getSelectedColor($event)">
+                              <li class="color-item" data-value="Blanco" id="blanco" [class.selected]="selectedColor === 'Blanco'"></li>
+                                <li class="color-item" data-value="Rojo" id="rojo" [class.selected]="selectedColor === 'Rojo'"></li>
+                                <li class="color-item" data-value="Amarillo" id="amarillo" [class.selected]="selectedColor === 'Amarillo'"></li>
+                                <li class="color-item" data-value="Azul" id="azul" [class.selected]="selectedColor === 'Azul'"></li>
+                                <li class="color-item" data-value="Negro" id="negro" [class.selected]="selectedColor === 'Negro'"></li>
+                                <li class="color-item" data-value="Café" id="cafe" [class.selected]="selectedColor === 'Café'"></li>
+                                <li class="color-item" data-value="Verde" id="verde" [class.selected]="selectedColor === 'Verde'"></li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-dark btn-lg"
+                                (click)="LimpiarFiltro()">Limpiar Filtros</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="productos col-lg-9 col-md-12">
+                <div class="row">
+                    <ng-container *ngIf="ListaNino.length; else noResults">
+                        <div class="col-md-4 col-lg-3 mb-4 col-6 col-xs-4"
+                            *ngFor="let ListaProducto of ListaNino | paginate: { itemsPerPage: 24, currentPage: p }">
+                            <div class="card d-flex flex-column border-1">
+                                <div class="zoom-effect">
+                                    <a (click)="abrirmodal()" (click)="getIDProducto(ListaProducto.pk_id_producto)"
+                                        data-toggle="modal" data-target="#modal1" class="m-2">
+                                        <img src="{{ListaProducto.img}}" alt="imagenproducto" class="img-fluid">
+                                    </a>
+                                    <div class="onsale position-absolute top-0 start-0">
+                                        <span *ngIf="ListaProducto.oferta != '0'" class="badge rounded-8"><span
+                                                class="discount">-{{ListaProducto.oferta}}%</span></span>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <!-- Sección del título -->
+                                    <p class="card-title mb-2">{{ListaProducto.nombre_producto}}</p>
+                                    <p class="card-text mb-2 d-inline">{{ListaProducto.genero}} / color: </p>
+                                    <p class="card-text mb-2 d-inline">{{ListaProducto.color}}</p>
+
+                                    <ul class="price list-inline mt-2">
+                                        <p class="price" style="font-weight: 700;">Precio: $ {{ListaProducto.costo}}</p>
+                                    </ul>
+                                    <!-- Botón para abrir el modal -->
+                                    <div class="text-center">
+                                        <a class="btn btn-success" style="color: white;" (click)="abrirmodal()"
+                                            (click)="getIDProducto(ListaProducto.pk_id_producto)" data-toggle="modal"
+                                            data-target="#modal1">
+                                            Detalles
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="p-4 text-center">
+                        <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                            class="pagination-lg d-flex justify-content-end">
+                        </pagination-controls>
+                    </div>
+                    <ng-template #noResults>
+                        <p>No hay resultados</p>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div *ngIf="info_modal==true">
+    <app-info-modals></app-info-modals>
+</div>

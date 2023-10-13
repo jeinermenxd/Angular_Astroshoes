@@ -1,0 +1,205 @@
+<!--Formulario de registro de producto-->
+<div class="modal fade" id="registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Registro de producto</h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <!--Formulario para registrar : producto--->
+            <div class="modal-body">
+                <form #form="ngForm" class="needs-validation" novalidate>
+                    <div class="card-body font-weight-bold">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="codigodelproducto">Código del producto</label>
+                                        <input [(ngModel)]="Producto.codigo_producto" type="text" class="form-control"
+                                            #campocodigo="ngModel" required name="Código del producto"
+                                            placeholder="Ingrese el Código del producto">
+                                        <small *ngIf="campocodigo.invalid && campocodigo.touched"
+                                            class="text-danger">Ingrese el codigo del producto</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="nombredelproducto">Nombre del producto</label>
+                                        <input [(ngModel)]="Producto.nombre_producto" type="text" class="form-control"
+                                            #camponombre="ngModel" required name="Nombre del producto"
+                                            placeholder="Ingrese el nombre del producto">
+                                        <small *ngIf="camponombre.invalid && camponombre.touched"
+                                            class="text-danger">Ingrese el nombre del producto</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="modelo">Modelo</label>
+                                        <input [(ngModel)]="Producto.modelo" type="text" class="form-control"
+                                            #campomodelo="ngModel" required name="Modelo"
+                                            placeholder="Ingrese el modelo del producto">
+                                        <small *ngIf="campomodelo.invalid && campomodelo.touched"
+                                            class="text-danger">Ingrese el Modelo</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label alt="marcasproducto" class="font-weight-bold">Marcas</label>
+                                        <select #comboBox1 class="custom-select form-control-border"
+                                            (change)="obtenerMarca(comboBox1.value)" id="MarcaSelect"
+                                            [(ngModel)]="MarcaSelect" name="MarcaSelect">
+                                            <option value="0">Seleccione una Marca</option>
+                                            <option *ngFor="let ListaMarca of ListaMarca"
+                                                value="{{ListaMarca.id_Marca}}">{{ListaMarca.nombre}}</option>
+                                        </select>
+                                        <small *ngIf="validamarca()==false" class="text-danger">Selecione una
+                                            Marca</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Talla</label>
+                                    <input [(ngModel)]="Producto.talla" type="number" class="form-control"
+                                        #campoTalla="ngModel" required name="Talla"
+                                        placeholder="Ingrese la talla del zapato">
+                                    <small *ngIf="campoTalla.invalid && campoTalla.touched" class="text-danger">Ingrese
+                                        la Talla</small>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Tipo de Color</label>
+                                        <select #comboBox3 class="custom-select form-control-border"
+                                            (change)="obtenerColor(comboBox3.value)" id="ColorSelect"
+                                            [(ngModel)]="ColorSelect" name="ColorSelect">
+                                            <option value="0">Seleccione Color</option>
+                                            <option *ngFor="let ListaColor of ListaColor" value="{{ListaColor.color}}">
+                                                {{ListaColor.color}}</option>
+                                        </select>
+                                        <small *ngIf="validaColor()==false" class="text-danger">Seleccione un
+                                            Color</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Tipo de persona</label>
+                                        <select #comboBox2 class="custom-select form-control-border"
+                                            (change)="obtenercGenero(comboBox2.value)" id="GeneroSelect"
+                                            [(ngModel)]="GeneroSelect" name="GeneroSelect">
+                                            <option value="0">Seleccione Género</option>
+                                            <option *ngFor="let ListaGenero of ListaGenero"
+                                                value="{{ListaGenero.genero}}">{{ListaGenero.genero}}</option>
+                                        </select>
+                                        <small *ngIf="validagenero()==false" class="text-danger">Selecione un
+                                            Genero</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Categoría</label>
+                                    <select #comboBox5 class="custom-select form-control-border"
+                                        (change)="obtenercategoria(comboBox5.value)" id="CategoriaSelect"
+                                        [(ngModel)]="CategoriaSelect" name="CategoriaSelect">
+                                        <option value="0">Seleccione una Categoría</option>
+                                        <option alt="cargarcategoria" *ngFor="let ListaCategoria of ListaCategoria"
+                                            value="{{ListaCategoria.pk_id_categoria}}">{{ListaCategoria.nombre_cat}}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="validacategoria()==false" class="text-danger">Selecione una
+                                        Categoria</small>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Costo Unitario $</label>
+                                        <input [(ngModel)]="Producto.costo" type="number" class="form-control" rows="1"
+                                            placeholder="Ingrese el Costo $" #campocosto="ngModel" required
+                                            name="Costo">
+                                        <small *ngIf="campocosto.invalid && campocosto.touched"
+                                            class="text-danger">Ingrese el Costo</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Tipo de Oferta (%)</label>
+                                        <select #comboBox4 class="custom-select form-control-border"
+                                            (change)="obtenerOfertaP(comboBox4.value)" id="OfertaSelect"
+                                            [(ngModel)]="OfertaSelect" name="OfertaSelect">
+                                            <option value="0">Oferta</option>
+                                            <option *ngFor="let ListaOferta of ListaOferta"
+                                                value="{{ListaOferta.oferta}}">
+                                                {{ListaOferta.oferta}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Seleccionar actividad</label>
+                                    <div class="form-check form-switch">
+                                        <input #checkbox2 type="checkbox" class="custom-control-input" id="activar"
+                                            (change)="obtenerEstado(checkbox2.checked)" class="form-check-input"
+                                            type="checkbox">
+                                        <label class="form-check-label" for="activar">Activo</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descripción del producto</label>
+                            <textarea [(ngModel)]="Producto.descripcion" type="text" class="form-control" rows="3"
+                                placeholder="Descripción del producto" #campodescipcion="ngModel" required
+                                name="Descripción del producto"></textarea>
+                            <small *ngIf="campodescipcion.invalid && campodescipcion.touched"
+                                class="text-danger">Ingrese una descripcion</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Cargar Imagen</label>
+                            <textarea [(ngModel)]="Producto.img" type="text" class="form-control" rows="3"
+                                placeholder="Ingrese URL para cargar imagen" #campoimg="ngModel" required
+                                name="Cargar imagen"></textarea>
+                            <small *ngIf="campoimg.invalid && campoimg.touched" class="text-danger">Ingrese URL
+                                Imagen
+                            </small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                            (click)="Limpiar()">Cerrar</button>
+                        <button (click)="agregarProducto()" type="button" class="btn btn-success"
+                            [disabled]="form.invalid || validaTodo()==false" data-bs-dismiss="modal">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

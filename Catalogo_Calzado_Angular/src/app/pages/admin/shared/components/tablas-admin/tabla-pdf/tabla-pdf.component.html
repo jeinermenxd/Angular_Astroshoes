@@ -1,0 +1,65 @@
+<div class="card-fluid mx-4 mt-5">
+    <div class="card" alt="contenedor de carta">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h2 class="card-title">Listar PDF</h2>
+            </div>
+        </div>
+
+        <!--Buscador dentro de la tabla-->
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="container">
+                        <div class="d-flex">
+                            <input class="form-control form-control-lg me-2" type="search" placeholder="Buscar pdf"
+                                aria-label="Search" #txtSearch (input)="filtrar(txtSearch.value)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fin de Buscador dentro de la tabla-->
+
+        <!-----Cuerpo de la tabla -->
+        <div class="card-body">
+            <div class="table-responsive ">
+                <table class="table table-hover">
+                    <thead alt="encabezados" class="bg-dark" style="color: white;">
+                        <tr>
+                            <th alt="version">Version</th>
+                            <th alt="descripcion" >Descripción</th>
+                            <th alt="enlace">Enlace</th>
+                            <th alt="operaciones">Operación</th>
+                        </tr>
+                    </thead>
+
+                    <div class="d-flex mt-2">
+                        <p class="text-danger" *ngIf="ListaPDF.length === 0 && txtSearch.value.length >= 0">
+                            No se encontró pdf</p>
+                    </div>
+
+                    <tbody
+                        *ngFor="let ListaPDF of ListaPDF | paginate: { itemsPerPage: 5, currentPage: p }; let i= index">
+                        <tr>
+                            <td class="col-sm-4" alt="Version">{{ListaPDF.version_pdf}}</td>
+                            <td class="col-md-6" alt="descripcion">
+                                {{ListaPDF.descripcion}}
+                            </td>
+                            <td class="col-md-8" alt="Enlace">{{ListaPDF.enlace_pdf}}</td>
+                            <td>
+                                <div class="btn-group p-2" role="group">
+                                    <button (click)="getIDPDF(ListaPDF.id_pdf)" class="btn btn-primary me-2"
+                                        data-bs-toggle="modal" data-bs-target="#modificar">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <app-modificar-pdf></app-modificar-pdf>
+    </div>
+</div>

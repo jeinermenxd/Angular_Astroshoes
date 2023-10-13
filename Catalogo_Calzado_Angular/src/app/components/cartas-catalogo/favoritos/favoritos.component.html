@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+<div class="bg-2 p-5">
+    <h1 class=" animated fadeIn t-stroke-shadow fs-1 fw-bolder text-center">Mi lista de Favoritos</h1>
+</div>
+<!-----------------------Titulo --------------------------
+-------------------------------------------------------->
+<div class="category-page">
+    <!-- Productos de hombres-->
+    <section class="products p-t-small">
+        <div class="container">
+            <div class="my-5">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-12 mb-4" *ngFor="let favorito of allfavoritos | paginate: { itemsPerPage: 8, currentPage: p }">
+                        <div class="card ">
+                            <div class="zoom-effect">
+                                <a class="m-2">
+                                    <img src="{{favorito.producto.img}}" alt="imagenproducto" class="img-fluid">
+                                </a>
+                                <div class="onsale position-absolute top-0 start-0">
+                                    <span *ngIf="favorito.producto.oferta != '0'" class="badge rounded-8"><span class="discount">-{{favorito.producto.oferta}}%</span></span>
+                                </div>
+                               
+                            </div>
+                            <div class="card-body">
+                                <!-- Sección del texto -->
+                                <p class="card-text" style="font-weight: 600;">Género: {{favorito.producto.genero}}</p>
+                                <!-- Sección del título -->
+                                <h4 class="card-title" style="font-weight: 1000;">{{favorito.producto.nombre_producto}}</h4>
+                                <!-- Sección del precio -->
+                                <ul class="list-group list-group-flush text-center" >
+                                    <li class="list-group-item">Precio: ${{favorito.producto.costo}}</li>
+                                    <li class="list-group-item">Modelo: {{favorito.producto.modelo}}</li>
+                                    <li class="list-group-item">Talla: {{favorito.producto.talla}}</li>
+                                  </ul>
+                                <!-- Botón para abrir el modal -->
+                                <div class="text-center">
+                                    <a class="btn btn-danger btn-md" style="color: white;" (click)="deleteFavorito(favorito.id_favorito)">
+                                        Quitar de favoritos
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---Verifica si tiene agregado algo en la seccion de favoritos de un usuario-->
+                    <div *ngIf="allfavoritos.length == 0">
+                        <h4 class="fw-bolder text-center">No tiene nada agregado en la lista de favoritos</h4>
+                        <h5 class="text-center">Visite nuestro sitio y agregue productos</h5>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--Logica de abrir modal de informacion del producto-->
+<div *ngIf="info_modal==true">
+    <app-info-modals></app-info-modals>
+</div>
+
+<app-footer></app-footer>

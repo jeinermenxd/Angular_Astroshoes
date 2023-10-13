@@ -1,0 +1,35 @@
+.factura {
+  table-layout: fixed;
+}
+
+.fact-info > div > h5 {
+  font-weight: bold;
+}
+
+.factura > thead {
+  border-top: solid 3px #000;
+  border-bottom: 3px solid #000;
+}
+
+.factura > tfoot {
+  border-top: solid 3px #000;
+  border-bottom: 3px solid #000;
+}
+
+.cond {
+  border-top: solid 2px #000;
+}
+
+
+/* Estilos personalizados para la paginación */
+.pagination-custom {
+  font-size: 25px; /* Aumenta el tamaño de la fuente */
+  margin-bottom: 20px; /* Agrega un espaciado inferior */
+}
+
+@media screen and (max-width: 768px) {
+  .pagination-custom {
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+    margin-bottom: 20px; /* Agrega un espaciado inferior */
+  }
+}

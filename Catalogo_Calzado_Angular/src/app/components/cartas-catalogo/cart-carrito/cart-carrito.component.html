@@ -1,0 +1,170 @@
+<app-navbar></app-navbar>
+<section class="gradient-custom">
+  <div class="container">
+    <div class="row d-flex justify-content-center my-4">
+      <div class="col-md-8">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h2 class="title"><b>Productos de MI CARRITO</b></h2>
+          </div>
+          <div class="card-body">
+            <!-- Single item -->
+            <div class="row" *ngFor="let carrito of allcarrito | paginate: { itemsPerPage: 10, currentPage: p }">
+              <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                <!-- Imagen -->
+                <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                  <img [src]="carrito.producto.img" class="w-100" />
+                </div>
+              </div>
+
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                <!-- Informacion de productos -->
+                <h4 class="card-title">{{ carrito.producto.nombre_producto }}</h4>
+                <p>Género: {{carrito.producto.genero}}</p>
+                <p>Talla: {{carrito.producto.talla}}</p>
+                <p>Modelo: {{carrito.producto.modelo}}</p>
+                <button (click)="deleteCarrito(carrito.id_carrito)" type="button"
+                  class="btn btn-danger btn-sm me-1 mb-2" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+
+                <!-- cantidad de productos -->
+                <div class="input-group mb-3">
+                  <button class="btn btn-primary" type="button" (click)="decrementarCantidad(carrito)">
+                    -
+                  </button>
+                  <input type="text" class="form-control text-center" [(ngModel)]="carrito.cantidad" readonly>
+                  <button class="btn btn-primary" type="button" (click)="incrementarCantidad(carrito)">+</button>
+                </div>
+                <p class="text-start text-md-center">
+                  <strong *ngIf="carrito.producto.oferta !== '0'" style="text-decoration: line-through; font-size: 1.2em;">
+                    $ {{Actualizaprecio(carrito.producto.pk_id_producto) }}
+                  </strong>
+                  <strong *ngIf="carrito.producto.oferta !== '0'" class="precio-oferta">-{{carrito.producto.oferta}}%</strong>
+                  <strong *ngIf="carrito.producto.oferta === '0'" style="font-size: 1.2em;">
+                    $ {{Actualizaprecio(carrito.producto.pk_id_producto) }}
+                  </strong>
+                </p>                
+              </div>
+              <hr class="my-4" />
+            </div>
+            <div *ngIf="allcarrito.length === 0">
+              <p>No hay productos en el carrito.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body">
+            <p><strong>Aceptamos</strong></p>
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+              alt="Visa" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              alt="American Express" />
+            <img class="me-2" width="45px"
+              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+              alt="Mastercard" />
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-header py-3">
+            <h2><b>Comprobante</b></h2>
+          </div>
+          <div class="card-body">
+            <ng-container *ngIf="allcarrito.length > 0">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between border-0 px-0 pb-0 fw-bolder">
+                  Subtotal (No Aplica Descuento)
+                  <span>$ {{SubTotal()}}</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 fw-bolder">
+                  Descuento
+                  <span style="color: red;">- ${{descuento}}</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0 fw-bolder">
+                  IVA
+                  <span>12 %</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0 fw-bolder">
+                  Envio
+                  <span>Gratis</span>
+                </li>
+              </ul>
+              <hr>
+              <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                <div>
+                  <strong>Total</strong>
+                  <strong>
+                    <p class="mb-0">(incluido I.V.A.)</p>
+                  </strong>
+                </div>
+                <span><strong>$ {{calcularTotal()}}</strong></span>
+              </li>
+            </ng-container>
+            <div *ngIf="allcarrito.length === 0">
+              <p>Comprobante vacio.</p>
+            </div>
+            <button type="button btn" data-toggle="modal" data-target="#modalPago"
+              class="btn btn-primary btn-lg btn-block">
+              PAGAR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Pago -->
+<div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="modalPagoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="card-header py-3">
+          <h2><b>Pago en linea</b></h2>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="tarjetaNumero">Número de Tarjeta</label>
+            <input minlength="16" maxlength="16" type="text" class="form-control" id="tarjetaNumero"
+              placeholder="0000 - 0000 - 0000 - 0000">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="tarjetaExpiracion">Fecha de Expiración (MM/AA)</label>
+              <input type="text" pattern="^(0[1-9]|1[0-2])\/\d{2}$" inputmode="numeric" class="form-control"
+                id="tarjetaExpiracion" placeholder="MM/AA" required>
+              <div class="invalid-feedback">
+                Por favor, ingrese una fecha válida en formato MM/AA.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="tarjetaCVV">CVV</label>
+              <input type="number" id="typeNumber" type="password" class="form-control" id="tarjetaCVV" minlength="3"
+                maxlength="3" placeholder="&#9679;&#9679;&#9679;" placeholder="CVV">
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="realizarPago()"  data-dismiss="modal" >Realizar
+            Pago</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

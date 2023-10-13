@@ -1,0 +1,93 @@
+<div class="btn-group pb-3 px-4 mt-5" role="group">
+  <button (click)="enviar()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registro"><i
+      class="fa-solid fa-square-up-right"></i> Insertar</button>
+</div>
+
+<div class="card-fluid mx-4">
+  <div class="card" alt="contenedor de carta">
+    <div class="card card-primary">
+      <div class="card-header" id="titulo">
+        <h2 class="card-title">Lista de Zapatos</h2>
+      </div>
+    </div>
+
+    <!--Buscador dentro de la tabla-->
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="container">
+            <div class="d-flex">
+              <input class="form-control form-control-lg me-2" type="search" placeholder="Buscar sus productos"
+                aria-label="Search" #txtSearch (input)="filtrar(txtSearch.value)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Cuerpo de la tabla-->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover" style="overflow-x: auto;">
+          <thead alt="encabezados" class="bg-dark" style="color: white;">
+            <tr>
+              <th class="d-lg-table-cell">Codigo</th>
+              <th>Nombre Zapato</th>
+              <th>Modelo</th>
+              <th>Talla</th>
+              <th>Género</th>
+              <th>Costo</th>
+              <th>Color</th>
+              <th>Oferta</th>
+              <th>Estado</th>
+              <th>Imagen</th>
+              <th>Operaciones</th>
+            </tr>
+          </thead>
+
+          <div class="d-flex mt-2">
+            <p class="text-danger" *ngIf="ListaProducto.length === 0 && txtSearch.value.length >= 0">No se encontró el
+              producto</p>
+          </div>
+
+          <!-- Registros de productos -->
+          <tbody alt="registros"
+            *ngFor="let ListaProducto of ListaProducto | paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr>
+              <td alt="codigo">{{ListaProducto.codigo_producto}}</td>
+              <td alt="nombre">{{ListaProducto.nombre_producto}}</td>
+              <td alt="modelo">{{ListaProducto.modelo}}</td>
+              <td alt="talla">{{ListaProducto.talla}}</td>
+              <td alt="genero">{{ListaProducto.genero}}</td>
+              <td alt="costo">${{ListaProducto.costo}}</td>
+              <td alt="color">{{ListaProducto.color}}</td>
+              <td alt="oferta">{{ListaProducto.oferta}} %</td>
+              <td alt="estado">{{ListaProducto.estado}}</td>
+              <td alt="imagen"><img src="{{ListaProducto.img}}" style="height: 90px; width: auto;"></td>
+              <td>
+                <div class="btn-group p-2" role="group">
+                  <button (click)="getIDProducto(ListaProducto.pk_id_producto)" class="btn btn-primary me-2"
+                    data-bs-toggle="modal" data-bs-target="#modificar">
+                    <i class="fas fa-pencil-alt"></i>
+                  </button>
+                  <app-modificar></app-modificar>
+                  <button (click)="eliminar(ListaProducto.pk_id_producto)" class="btn btn-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--Paginacion-->
+      <pagination-controls 
+      responsive="true" (pageChange)="p = $event"
+      previousLabel="" 
+      nextLabel="" 
+      class="my-pagination d-flex justify-content-center"
+      [autoHide]="true">
+    </pagination-controls>
+    </div>
+  </div>
+</div>

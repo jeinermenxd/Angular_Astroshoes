@@ -1,0 +1,61 @@
+p {
+  font-size: 15px;
+}
+
+.card-img-top{
+  width:90% ;
+  padding-left: 20px;
+}
+
+.btn-success {
+  background-color: #1F618D;
+  border-color: #1F618D;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #242424;
+  border-color: #242424;
+  color: #fff;
+}
+
+.card-body .onsale .badge {
+  background: #000;
+  font-size: 12px;
+  padding: 5px 14px;
+  top: 0px;
+  position: absolute;
+  left: 0px;
+}
+
+/* Estilos para el contenedor */
+.zoom-effect {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* Efecto de zoom al pasar el cursor sobre la imagen */
+.zoom-effect:hover img {
+  transform: scale(0.9);
+  width: 100%;
+  /* La imagen ocupa todo el espacio del contenedor */
+  height: 100%;
+  /* La imagen ocupa todo el espacio del contenedor */
+}
+
+/* Estilos para la imagen */
+.zoom-effect img {
+  transition: transform 0.4s ease;
+}
+
+/* Hace que la imagen del slide se ponga de color original en cierto
+  pixeles de la pantalla */
+@media (max-width: 740px) {
+  .bg-2 {
+    padding-bottom: 500px;
+    padding: -20px;
+  }
+}
+

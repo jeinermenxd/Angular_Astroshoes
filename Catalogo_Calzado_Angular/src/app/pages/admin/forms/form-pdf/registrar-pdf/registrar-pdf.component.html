@@ -1,0 +1,56 @@
+<!--Formulario de registro de pdf-->
+<div class="modal fade" id="registro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Registro de PDF </h3>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--Formulario para registrar : pdf--->
+            <div class="modal-body">
+                <form #form="ngForm" class="needs-validation" novalidate>
+                    <div class="card-body" >
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="textField" class="from-label">Version</label>
+                                <input  [(ngModel)]="pdf.version_pdf" type="text" class="form-control"
+                                        id="exampleInputEmail1"
+                                        #campoVersion="ngModel" required
+                                        placeholder="Ingrese la version de pdf" 
+                                        name="Version"                               
+                                        >
+                                        <small *ngIf="campoVersion.invalid && campoVersion.touched" class="text-danger">Ingrese la Version</small>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="textField" class="from-label">Enlace</label>
+                            <input  [(ngModel)]="pdf.enlace_pdf" type="text" class="form-control"
+                                    id="exampleInputEmail"
+                                    #campoenlace="ngModel" required
+                                    placeholder="Ingrese el enlace " 
+                                    name="Enlace"                               
+                                    >
+                                    <small *ngIf="campoenlace.invalid && campoenlace.touched" class="text-danger">Ingrese el enlace del pdf</small>
+                            
+                        </div>
+                        <div class="form-group">
+                        
+                            <label>Descripción del PDF</label>
+                            <textarea   [(ngModel)]="pdf.descripcion" 
+                                        type="text" class="form-control" rows="3" 
+                                        #campodescripcion="ngModel" required
+                                        placeholder="Ingrese la descripcion" 
+                                        name="Descripción"></textarea>
+                                        <small *ngIf="campodescripcion.invalid && campodescripcion.touched" class="text-danger">Ingrese una descripcion</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                        <button  (click)="agregarpdf()" type="button" class="btn btn-success" [disabled]="form.invalid" data-bs-dismiss="modal" >Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

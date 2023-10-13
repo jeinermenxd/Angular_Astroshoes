@@ -1,0 +1,64 @@
+
+
+<div class="card-fluid mx-4">
+  <div class="card" alt="contenedor de carta">
+    <div class="card card-primary">
+      <div class="card-header" id="titulo">
+        <h2 class="card-title">Lista de Reseñas</h2>
+      </div>
+    </div>
+    <!--Buscador dentro de la tabla-->
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="container">
+            <div class="d-flex">
+              <input class="form-control form-control-lg me-2" type="search" placeholder="Buscar por comentarios"
+                aria-label="Search" #txtSearch (input)="filtrar(txtSearch.value)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Cuerpo de la tabla-->
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover" style="overflow-x: auto;">
+          <thead alt="encabezados" class="bg-dark" style="color: white;">
+            <tr >
+              <th class="d-lg-table-cell">#</th>
+              <th>Usuario</th>
+              <th >Puntuación</th>
+              <th>Comentario</th>
+            </tr>
+          </thead>
+          <div class="d-flex mt-2">
+            <p class="text-danger" *ngIf="ListaResenas.length === 0 && txtSearch.value.length >= 0">No se encontró el comentario de la reseña</p>
+          </div>
+
+          <!-- Registros de productos -->
+          <tbody alt="registros"
+            *ngFor="let ListaResenas of ListaResenas | paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr >
+              <td alt="identificador">{{ListaResenas.id_resenas}}</td>
+              <td alt="identificador">{{ListaResenas.nombre}}</td>
+              <td alt="puntuacion">
+                <ul class="list-inline rating-list" *ngFor="let star of stars" >
+                  <li [ngClass]="{'selected': (star <= ListaResenas.estrellas)}">
+                      <i class="fa fa-star"></i>
+                  </li>
+              </ul>
+               </td>
+               <td alt="comentario" >{{ListaResenas.comentario}}</td>
+             </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--Paginacion-->
+      <pagination-controls responsive="true" (pageChange)="p = $event" previousLabel="" nextLabel="" class="my-pagination d-flex justify-content-center"
+        [autoHide]="true">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.rating-list li {
+    float: right;
+    color: #ddd;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.rating-list li:hover,
+.rating-list li:hover~li,
+.rating-list li.selected {
+    color: #fdd805;
+}
+
+.rating-list {
+    display: inline-block;
+    list-style: none;
+}
+.card .card-primary{
+    background: rgb(53, 115, 231);
+}
+.card-title{
+    color: rgb(255, 255, 255);
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: rgb(153, 0, 255);
+    font-size: 20px;
+}

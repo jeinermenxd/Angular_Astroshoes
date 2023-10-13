@@ -1,0 +1,153 @@
+<!----Navbar primario, aqui se visualiza el nombre del usuario--->
+<nav class="navbar border-bottom bg-black navbar-dark">
+    <div class="container">
+
+        <div *ngIf="!isLoggedIn || isLoggedIn" class="col-sm-12 col-xs-12 centerOnMobile text-center">
+            <span class="animacion-caracter" (click)="redirectAndScrollToTop('/home')"><strong>Bienvenido a nuestro
+                    catálogo</strong></span>
+        </div>
+    </div>
+</nav>
+<!----Navbar secundario, aqui se visualiza las secciones, la cuenta, buscador--->
+<nav class="navbar navbar-expand-lg bg-black navbar-dark sticky-top ">
+    <div class="container-fluid mx-3">
+        <img [routerLink]="['/home']" (click)="redirectAndScrollToTop('/home')"
+            src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea"
+            width="80" height="70">
+        <a class="mx-3 animacion-titulo-logo" [routerLink]="['/home']"
+            (click)="redirectAndScrollToTop('/home')">AstroShoes</a>
+        <!---<a class="mx-3 animacion-titulo-logo" [routerLink]="['/home']" (click)="redirectAndScrollToTop('/home')">AstroShoes</a>-->
+
+        <!--------TOGGLE DE NAVBAR RESPONSIVO--------------->
+        <i type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+            aria-expanded="false" aria-label="Toggle navigation"
+            class=" navbar-toggler fa-sharp fa-solid fa-bars fa-beat fa-lg" style="color: #ffffff;"></i>
+        <!--------FIN DE TOGGLE DE NAVBAR RESPONSIVO-------->
+
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item" >
+                    <a href="/" class="nav-link ml-2" aria-current="page" >Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle ml-2" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">Catalogo
+                    </a>
+                    <ul class="dropdown-menu bg-dark " aria-labelledby="navbarDropdownMenuLink">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLinkActive="active"
+                                (click)="redirectAndScrollToTop('/hombres')">Hombres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLinkActive="active"
+                                (click)="redirectAndScrollToTop('/mujeres')">Mujeres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" routerLinkActive="active"
+                                (click)="redirectAndScrollToTop('/ninos')">Niños</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ml-2 " aria-current="page" routerLinkActive="active"
+                        (click)="redirectAndScrollToTop('/ultimas_novedades')">Novedades</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link ml-2 " routerLinkActive="active"
+                        (click)="redirectAndScrollToTop('/ofertas')">Ofertas</a>
+                </li>
+
+                <li class="nav-item" *ngIf="isLoggedIn && userRole">
+                    <a class="nav-link ml-2" routerLinkActive="active"
+                        (click)="redirectAndScrollToTop('/favoritos')">Favoritos</a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link ml-2 " routerLinkActive="active" (click)="generar_pdf()">Catalogo PDF</a>
+                </li>
+            </ul>
+
+
+            <!--Buscador para pantallas grandes -->
+            <div class="d-flex d-lg-flex ms-auto mr-3" *ngIf="windowWidth >= 1100">
+                <form class="input-group" id="searchForm">
+                    <button class="btn" [ngClass]="{'btn-start': !buscando, 'btn-background': buscando}" type="submit"
+                        (click)="abrirmodal()" routerLinkActive="active" (click)="getBusca(); txtSearch.value=''"
+                        (click)="redirectAndScrollToTop('/buscar')">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <input class="form-control" type="search" placeholder="Buscar zapatos" aria-label="Buscar"
+                        #txtSearch (input)="filtrar(txtSearch.value)">
+                </form>
+            </div>
+
+            <!-- Formulario de búsqueda oculto para pantallas pequeñas -->
+            <form class="input-group d-lg-none d-flex ms-auto mr-3" *ngIf="windowWidth < 1400" id="searchFormSmall">
+                <button class="btn" type="submit" (click)="abrirmodal()" routerLinkActive="active"
+                    (click)="getBusca(); txtSearch.value=''" (click)="redirectAndScrollToTop('/buscar')">
+                    <i class="fas fa-search"></i>
+                </button>
+                <input class="form-control" type="search" placeholder="Buscar zapatos" aria-label="Buscar" #txtSearch
+                    (input)="filtrar(txtSearch.value)">
+            </form>
+
+
+
+            <!--Logo de carrito de compras-->
+            <ul class="navbar-nav mx-3 align-items-center">
+                <li class="nav-item" *ngIf="isLoggedIn && userRole">
+                    <i (click)="redirectAndScrollToTop('/carrito')" class="fa-solid fa-cart-shopping fa-bounce fa-xl"
+                        style="color: #ffffff;"></i>
+                    <a *ngIf="windowWidth >= 1100" class="animacion-caracter ml-2" routerLinkActive="active"
+                        (click)="redirectAndScrollToTop('/carrito')"> Mi
+                        carrito</a>
+                    <a *ngIf="windowWidth < 990" class="animacion-caracter ml-2" routerLinkActive="active"
+                        (click)="redirectAndScrollToTop('/carrito')"> Mi
+                        carrito</a>
+                </li>
+            </ul>
+            <!--Fin del logo de carrito de compras-->
+
+            <ul class="navbar-nav ">
+                <!---Usuario logueado-->
+                <ul class="navbar-nav mx-2 align-items-center" *ngIf="isLoggedIn">
+                    <li class="nav-item dropdown">
+                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2Fusuario_logo.png?alt=media&token=9abd87d6-bd6e-4c11-9c19-cd5cbd603a38"
+                                alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <a class="animacion-caracter" routerLinkActive="active">{{nombreUsuario}}</a>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-black shadow bg-dark" style="color: rgb(255, 255, 255);"
+                            aria-labelledby="dropdownUser1">
+                            <li class="nav-item" *ngIf="isLoggedIn && userRole">
+                                <a class="animacion-caracter" (click)="redirectAndScrollToTop('/comprobantes')">
+                                    Comprobantes</a>
+                            </li>
+                            <li class="nav-item" *ngIf="isLoggedIn && admin">
+                                <a class="animacion-caracter" routerLinkActive="active"
+                                    [routerLink]="['/admin/form-inicio']">Administrador</a>
+                            </li>
+                            <li class="nav-item" *ngIf="isLoggedIn" (click)="getBuscaUsuario()"
+                                (click)="redirectAndScrollToTop('/editaruser')">
+                                <a class="animacion-caracter">Editar Perfil</a>
+                            </li>
+                            <li class="nav-item" *ngIf="isLoggedIn" (click)="logout()">
+                                <a class="animacion-caracter">Cerrar Sesión</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="align-items-center text-center">
+                    <li *ngIf="!isLoggedIn" (click)="redirectAndScrollToTop('/login')">
+                        <i class="fa-regular fa-circle-user fa-xl" style="color: #ffffff;"></i>
+                        <a class="animacion-caracter mx-2" routerLinkActive="active">Iniciar Sesión</a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,11 @@
+.card .card-primary{
+    background: rgb(53, 115, 231);
+}
+.card-title{
+    color: rgb(255, 255, 255);
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: rgb(153, 0, 255);
+    font-size: 20px;
+}

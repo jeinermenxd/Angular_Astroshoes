@@ -1,0 +1,34 @@
+/* Cambia el color de la imagen */
+#whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 90px;
+    transition: transform 0.3s;
+    /* Agrega una transición de 0.3 segundos */
+}
+
+/* Efecto hover */
+#whatsapp:hover {
+    transform: scale(1.2);
+    /* Escala la imagen al 140% del tamaño original en hover */
+    filter: grayscale(0%);
+}
+
+/* Icono de rating */
+#rating {
+    position: fixed;
+    bottom: 120px;
+    right: 37px;
+    width: 65px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+/* Efecto hover */
+#rating:hover {
+    transform: scale(1.2);
+    /* Escala la imagen al 140% del tamaño original en hover */
+    filter: grayscale(0%);
+    /* Elimina el efecto blanco y negro en hover */
+}

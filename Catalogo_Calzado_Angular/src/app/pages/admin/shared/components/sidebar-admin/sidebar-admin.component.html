@@ -1,0 +1,80 @@
+<div class="container-fluid overflow-hidden">
+    <div class="row vh-100 overflow-auto">
+        <div class="col-12 col-sm-3 col-xl-2 px-sm-1 px-0 bg-dark d-flex sticky-top">
+            <div
+                class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
+                <br>
+                <a class="d-flex flex-column align-items-center pb-sm-3 mb-md-0 me-md-auto text-white text-decoration-none px-8">
+                    <img style="height: 75px; right: inherit; right: 50px;"
+                      src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2FLOGOTIPO.png?alt=media&token=18bc0239-c730-490e-ba6a-751e4e76a8ea"
+                      alt="" class="d-none d-sm-inline"> <!-- Agregamos las clases de visibilidad responsiva -->
+                    <span class="fs-6 d-none d-sm-inline px-sm-4">ASTROSHOES</span>
+                  </a>
+                  
+
+                <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start"
+                    id="menu">
+                    <li class="nav-item">
+                        <a [routerLink]="['../form-inicio']" class="nav-link px-0 px-2">
+                            <i class="fs-2 bi-house"></i> <span class="ms-1 d-none d-sm-inline"> Inicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['../form-usuarios']" data-bs-toggle="collapse" class="nav-link px-0 px-2">
+                            <i class="fs-2 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline"> Usuarios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['../form-marca']" data-bs-toggle="collapse" class="nav-link px-0 px-2">
+                            <i class="fs-2 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline"> Marcas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['../form-categoria']" data-bs-toggle="collapse" class="nav-link px-0 px-2">
+                            <i class="fs-2 bi-badge-cc"></i> <span class="ms-1 d-none d-sm-inline"> Categorias</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['../form-productos']" class="nav-link px-0 px-2">
+                            <i class="fs-2 bi-bag-dash-fill"></i> <span
+                                class="ms-1 d-none d-sm-inline"> Productos</span></a>
+                    </li>
+
+                    <li>
+                        <a [routerLink]="['../form-pdf']" class="nav-link px-0 px-2">
+                            <i class=" fs-2 bi bi-filetype-pdf"></i>
+                            <span class="ms-1 d-none d-sm-inline"> PDF Catálogo</span></a>
+                    </li>  
+                    <li>
+                        <a [routerLink]="['../form-resenas']" class="nav-link px-0 px-2">
+                            <i class="fs-2 bi bi-star-fill"></i>
+                            <span class="ms-1 d-none d-sm-inline"> Reseñas generales</span></a>
+                    </li>                       
+                </ul>
+                <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/proyectcatalogozapatos.appspot.com/o/Imagenes%2Frecursos%2Flogos%2Fusuario_logo.png?alt=media&token=9abd87d6-bd6e-4c11-9c19-cd5cbd603a38"
+                            alt="hugenerd" width="30" height="30" class="rounded-circle">
+                        <span class="d-none d-sm-inline mx-1">{{ nombreUsuario }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" [routerLink]="['home']" href="/">Ir a sitio web</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" [routerLink]="['home']" (click)="logout()">Cerrar Sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col col-lg-9 col-xl-10 col-md-9 col-sm-9 d-flex flex-column h-sm-100" >
+            <div class="row overflow-auto" >
+                <div class="col pt-3 " >
+                    <ng-content></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

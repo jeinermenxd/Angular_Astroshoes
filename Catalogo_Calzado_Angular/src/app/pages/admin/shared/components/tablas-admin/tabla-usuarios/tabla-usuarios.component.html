@@ -1,0 +1,81 @@
+<div class="card mx-4 mt-5">
+    <div class="card" alt="contenedor de carta">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Lista de Usuarios</h3>
+            </div>
+        </div>
+        <!--Buscador dentro de la tabla-->
+        <div class="card-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="container">
+                        <div class="d-flex">
+                            <input class="form-control form-control-lg me-2" type="search"
+                                placeholder="Buscar usuario registrado" aria-label="Search" #txtSearch
+                                (input)="filtrar(txtSearch.value)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Cuerpo de la tabla-->
+        <div class="card-body">
+            <div class="table-responsive" style="overflow-x: auto; max-width: 100%;">
+                <table class="table table-hover" style="min-width: 700px;">
+                    <thead alt="encabezados" class="bg-dark" style="color: white;">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Email</th>
+                            <th>Fecha de creación</th>
+                            <th>Rol</th>
+                            <th>Operacion</th>
+                        </tr>
+                    </thead>
+                    <div class="d-flex mt-2">
+                        <p class="text-danger" *ngIf="ListaUsuario.length === 0 && txtSearch.value.length >= 0">No se
+                            encontró el usuario</p>
+                    </div>
+                    <!--Registros de usuarios-->
+                    <tbody alt="registros"
+                        *ngFor="let ListaUsuario of ListaUsuario | paginate: { itemsPerPage: 6, currentPage: p }; let i= index ">
+                        
+                        <tr>
+                            <td alt="codigo">{{ListaUsuario.id_usuario}}</td>
+                            <td alt="nombres">{{ListaUsuario.nombres}}</td>
+                            <td alt="apellidos">{{ListaUsuario.apellidos}}</td>
+                            <td alt="email">{{ListaUsuario.email}}</td>
+                            <td alt="date creacion">{{ListaUsuario.created_at}}</td>
+                            <td>
+                              <div class="form-check form-switch">
+                                <input #checkbox2 type="checkbox" class="custom-control-input" id="activar" [checked]="obtenerAdmin(ListaUsuario.id_usuario)"
+                                    (change)="obtenerEstado(checkbox2.checked,ListaUsuario.id_usuario)" class="form-check-input"
+                                    type="checkbox">
+                                <label class="form-check-label" for="activar">Activo</label>
+                            </div>
+                          </td>
+                            <td>
+                                <div class="btn-group p-2" role="group">
+                                    <button (click)="eliminar(ListaUsuario.id_usuario)" class="btn btn-danger me-2"
+                                        data-bs-toggle="modal" data-bs-target="#modificar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--Paginacion-->
+      <pagination-controls (pageChange)="p = $event" 
+      responsive="true"
+      previousLabel="" 
+      nextLabel="" 
+      class="my-pagination d-flex justify-content-center"
+      [autoHide]="true">
+    </pagination-controls>
+        </div>
+    </div>
+</div>

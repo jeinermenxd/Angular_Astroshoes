@@ -1,0 +1,196 @@
+.blog-form {
+  background-color: #fdfdfd;
+  height: 700px;
+  width: 80%;
+}
+
+.sticky-top {
+  top: 110px;
+/* Ajusta la distancia desde la parte superior según tus necesidades */
+}
+
+
+.card-title {
+  color: #000000;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 1000;
+}
+
+.card-text {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #313131;
+}
+
+.card-precio {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+}
+
+
+.btn-success {
+  background-color: #1F618D;
+  border-color: #1F618D;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #242424;
+  border-color: #242424;
+  color: #fff;
+}
+
+.product-image {
+  width: 300px;
+  height: 300px;
+}
+
+.page-section {
+  padding: 4rem 0;
+  margin-left: 50px; /* Ajusta el valor del margen izquierdo según tus necesidades */
+  margin-right: 50px; /* Ajusta el valor del margen derecho según tus necesidades */
+}
+
+
+/* Estilos para el contenedor */
+.zoom-effect {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  height: 100%;
+}
+
+/* Efecto de zoom al pasar el cursor sobre la imagen */
+.zoom-effect:hover img {
+  transform: scale(0.9);
+  width: 100%;
+  /* La imagen ocupa todo el espacio del contenedor */
+  height: 100%;
+  /* La imagen ocupa todo el espacio del contenedor */
+}
+
+/* Estilos para la imagen */
+.zoom-effect img {
+  transition: transform 0.4s ease;
+}
+
+
+/* Aumentar el tamaño de la paginación */
+.pagination-lg {
+  font-size: 20px;
+  /* Ajusta el tamaño de la fuente según tus preferencias */
+  margin: 10px 0;
+  /* Ajusta el espaciado vertical según tus preferencias */
+}
+
+/* Aumentar el tamaño de los botones de la paginación */
+.pagination-lg .page-link {
+  padding: 10px 16px;
+  /* Ajusta el padding según tus preferencias */
+}
+
+ul {
+  list-style: none;
+  display: grid;
+  grid-gap: 20px;
+}
+
+.color-item {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s;
+  border: 2px solid transparent;
+  /* Añadimos un borde inicial transparente */
+}
+
+.color-item:hover,
+.color-item.selected {
+  transform: scale(1.6);
+  border-color: #000000;
+  /* Cambiamos el color del borde en hover y cuando está seleccionado */
+}
+
+#blanco {
+background-color: #dbd6d6;
+}
+
+#rojo {
+  background-color: #ef5350;
+}
+
+
+#amarillo {
+  background-color: #ffca28;
+}
+
+#azul {
+  background-color: #42a5f5;
+}
+
+#negro {
+  background-color: #050505;
+}
+
+#cafe {
+  background-color: #800000;
+}
+
+#verde {
+  background-color: #66bb6a;
+}
+
+
+
+/* La regla `@media` en CSS se utiliza para aplicar diferentes estilos según las características del
+dispositivo o el tamaño de la pantalla. En este caso, el código que proporcionó contiene varias
+consultas `@media` que apuntan a diferentes tamaños de pantalla. */
+
+@media (max-width: 480px) {
+  .card-title {
+      font-size: 1px;
+      /* Ajusta el tamaño de fuente según tu preferencia */
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .blog-form {
+      width: 100%;
+  }
+}
+
+@media screen and (max-width: 995px) {
+  .blog-form {
+      height: 700px;
+      /* Puedes ajustar el valor de altura que desees para pantallas menores */
+      padding-top: 40px;
+  }
+}
+
+@media screen and (max-width: 995px) {
+  .productos {
+      padding-top: 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .page-section {
+      margin-left: 1px; /* Ajusta el valor del margen izquierdo según tus necesidades */
+      margin-right: 1px; /* Ajusta el valor del margen derecho según tus necesidades */
+  }
+  .card-text{
+      font-size: 14px;
+  }
+  .card-title{
+      font-size: 13px;
+  }
+  .card{
+      height: 400px;
+  }
+  .zoom-effect{
+      height: 300px;
+  }
+}

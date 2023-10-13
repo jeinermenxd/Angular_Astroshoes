@@ -1,0 +1,10 @@
+.card .card-primary{
+    background: rgb(53, 115, 231);
+}
+.card-title{
+    color: rgb(255, 255, 255);
+}
+.table-col-desc {
+    width: 70%;
+}
+

@@ -1,0 +1,107 @@
+/* Estilo para todos los enlaces (<a>) en el sitio web. */
+a {
+  font-size: 14px; /* Tamaño de fuente de 14px */
+  font-weight: 700; /* Peso de fuente en 700 (negrita) */
+}
+
+/* Estilo para el logotipo de la barra de navegación. */
+.navbar-brand {
+  color: #ffffff; /* Color del texto en #f3f3f3 */
+  font-family: Arial, Helvetica, sans-serif; /* Tipografía utilizada: Arial, Helvetica, sans-serif */
+  font-weight: 700; /* Peso de fuente en 700 (negrita) */
+  font-size: 35px; /* Tamaño de fuente de 25px */
+}
+
+
+#firstnavbar{
+  background-color: #757575;
+}
+
+
+/* Animación del título del logo */
+.animacion-titulo-logo {
+  text-transform: uppercase; /* Transformar el texto a mayúsculas */
+  background-image: linear-gradient(-225deg, #231557 0%, #f80404 29%, #ffffff 67%, #ff0000 100%); /* Gradiente de colores de fondo */
+  background-size: auto auto; /* Tamaño del fondo degradado */
+  background-clip: border-box; /* El fondo degradado se limita al tamaño de la caja */
+  background-size: 200% auto; /* Tamaño del fondo degradado con 200% de ancho */
+  color: #fff; /* Color del texto en blanco */
+  background-clip: text; /* Se aplica el fondo degradado al texto */
+  text-fill-color: transparent; /* Color del texto transparente */
+  -webkit-background-clip: text; /* Propiedad específica para navegadores basados en Webkit */
+  -webkit-text-fill-color: transparent; /* Color del texto transparente para navegadores basados en Webkit */
+  animation: textclip 2s linear infinite; /* Animación aplicada al texto */
+  display: inline-block; /* Mostrar el elemento como un bloque en línea */
+  font-size: 20px; /* Tamaño de fuente de 20px */
+}
+
+/* Estilos aplicados para pantallas con un ancho máximo de 540px */
+@media screen and (max-width: 540px) {
+  .centerOnMobile {
+    text-align: left; /* Alinear el texto a la izquierda */
+  }
+  .d-flex {
+    padding: 30px; /* Relleno (padding) de 30px para elementos con clase .d-flex */
+  }
+}
+
+/* Estilos adicionales aplicados para pantallas con un ancho máximo de 540px */
+@media screen and (max-width: 540px) {
+  .buscador {
+    padding: 30px; /* Relleno (padding) de 30px para elementos con clase .buscador */
+  }
+  .d-flex {
+    padding: 30px; /* Relleno (padding) de 30px para elementos con clase .d-flex */
+  }
+}
+
+
+/* Estilo para el texto de relleno (placeholder) de un elemento con clase .e-input dentro de un elemento con clases .e-ddl y .e-input-group */
+.e-ddl.e-input-group input.e-input::placeholder {
+  color: rgb(0, 0, 0); /* Color del texto de relleno (placeholder) en negro (RGB: 0, 0, 0) */
+}
+
+/* Estilo para los botones */
+.btn {
+  color: #ff0000; /* Color del texto en #ff0000 (rojo) */
+  background-color: white; /* Color de fondo en blanco */
+}
+
+/* Estilo para los botones con clase .btn-background */
+.btn-background {
+  background-color: #e0d0d0; /* Color de fondo en #e0d0d0 */
+  color: #ff0000; /* Color del texto en #ff0000 (rojo) */
+}
+
+/* Estilo para la barra de navegación expandida */
+.navbar-expand {
+  width: 1200px; /* Ancho de la barra de navegación expandida en 1200px */
+}
+
+/* Cambiar el cursor a mano de selección (pointer) cuando se coloca el mouse sobre el <li> */
+.nav-item {
+  cursor: pointer; /* Cambia el cursor a la forma de una mano de selección (pointer) */
+}
+
+
+ul{
+  cursor: pointer;
+}
+
+
+.mobile-modal-footer{
+
+  width: 87%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  color: #274d8a;
+}
+
+.mobile-modal-footer i:hover{
+
+  color: #fefefe;
+}
+

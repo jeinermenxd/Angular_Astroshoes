@@ -1,0 +1,70 @@
+<app-navbar></app-navbar>
+
+<!------------------------------------------------------
+-----------------------Titulo --------------------------
+-------------------------------------------------------->
+<div class="category-page">
+    <app-marcas-image></app-marcas-image>
+    <!-- Productos de hombres-->
+    <section class="products p-t-small">
+        <div class="container animated fadeIn">
+            <div class="row">
+                <ng-container>
+                    <div class="col-md-4 col-lg-3 mb-4"
+                        *ngFor="let ListaProducto of ListaProducto | paginate: { itemsPerPage: 8, currentPage: p }">
+                        <div class="card">
+                            <div class="">
+                                <div class="zoom-effect">
+                                    <a (click)="abrirmodal()" (click)="getIDProducto(ListaProducto.pk_id_producto)"
+                                        data-toggle="modal" data-target="#modal1">
+                                        <img src="{{ListaProducto.img}}" alt="imagenproducto" class="img-fluid">
+                                    </a>
+                                    <div class="onsale position-absolute top-0 start-0">
+                                        <span *ngIf="ListaProducto.oferta != '0'" class="badge rounded-8"><span class="discount">-{{ListaProducto.oferta}}%</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body text-center">
+                                <!-- Sección del texto -->
+                                <p class="card-text">{{ListaProducto.genero}}</p>
+
+                                <!-- Sección del título -->
+                                <h4 class="card-title">{{ListaProducto.nombre_producto}}</h4>
+
+                                <!-- Sección del precio -->
+                                <ul class="price list-inline">
+                                    <li class="list-inline-item">
+                                        <span class="price">Precio: $ {{ListaProducto.costo}}</span>
+                                    </li>
+                                </ul>
+
+                                <!-- Botón para abrir el modal -->
+                                <a class="btn btn-success button-text" style="color: white;" (click)="abrirmodal()"
+                                    (click)="getIDProducto(ListaProducto.pk_id_producto)" data-toggle="modal"
+                                    data-target="#modal1">
+                                    <i class="fa-solid fa-circle-info"></i> Detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="p-4 text-center">
+                    <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""
+                        class="pagination-lg d-flex justify-content-end">
+                    </pagination-controls>
+                </div>
+                <div *ngIf="mensajeNoresultado()" class="d-flex justify-content-center align-items-center flex-column">
+                    <h4 style="font-weight: bolder;">NO HAY RESULTADOS</h4>
+                    <a type="button" class="btn btn-dark mt-3" href="#">Volver al Inicio</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!--Logica de abrir modal de informacion del producto-->
+<div *ngIf="info_modal==true ">
+    <app-info-modals></app-info-modals>
+</div>
+<app-footer></app-footer>
